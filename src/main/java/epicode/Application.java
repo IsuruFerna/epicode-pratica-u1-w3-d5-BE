@@ -16,5 +16,7 @@ public class Application {
         UtenteDAO user = new UtenteDAO(em);
         Utente u1 = new Utente("bob", "baa", LocalDate.parse("2000-01-01"), "22222222222");
         user.save(u1);
+
+
     }
 }
