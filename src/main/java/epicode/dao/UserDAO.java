@@ -1,22 +1,22 @@
 package epicode.dao;
 
-import epicode.entities.Utente;
+import epicode.entities.User;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 
-public class UtenteDAO {
+public class UserDAO {
     private final EntityManager em;
 
-    public UtenteDAO(EntityManager em) {
+    public UserDAO(EntityManager em) {
         this.em = em;
     }
 
-    public void save(Utente u) {
+    public void save(User a) {
         EntityTransaction transaction = em.getTransaction();
         transaction.begin();
-        em.persist(u);
+        em.persist(a);
         transaction.commit();
-        System.out.println("Utente salvato!");
+        System.out.println("New user saved correctly!");
     }
 }

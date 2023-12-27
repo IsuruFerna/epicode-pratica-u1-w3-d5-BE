@@ -19,13 +19,8 @@ public abstract class Publication {
     private LocalDate releasedYear;
     private int numPages;
 
-    @ManyToMany
-    @JoinTable(
-            name = "borrowed_publication",
-            joinColumns = @JoinColumn(name = "publication_id"),
-            inverseJoinColumns = @JoinColumn(name = "user_id")
-    )
-    private List<User> users = new ArrayList<>();
+    @ManyToMany(mappedBy = "publications")
+    private List<Borrowed> borroweds = new ArrayList<>();
 
     public Publication(long ISBNcode, LocalDate releasedYear, int numPages) {
         this.ISBNcode = ISBNcode;

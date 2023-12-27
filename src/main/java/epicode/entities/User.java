@@ -1,10 +1,9 @@
 package epicode.entities;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.StringJoiner;
 
 @Entity
@@ -18,10 +17,13 @@ public class User {
     @Column(unique = true)
     private String cardNumber;
 
-    public User(String name, String surname, LocalDate birthDate, String cardNumber) {
+    @OneToMany(mappedBy = "user")
+    private List<Borrowed> borroweds = new ArrayList<>();
+
+    public User(String name, String surname, String birthDate, String cardNumber) {
         this.name = name;
         this.surname = surname;
-        this.birthDate = birthDate;
+        this.birthDate = LocalDate.parse(birthDate);
         this.cardNumber = cardNumber;
     }
 

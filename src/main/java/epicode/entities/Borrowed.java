@@ -1,9 +1,6 @@
 package epicode.entities;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.ManyToMany;
+import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -14,21 +11,26 @@ public class Borrowed {
     @Id
     @GeneratedValue
     private long id;
+    @ManyToOne
     private User user;
-    private Publication publication;
     private LocalDate borrowedDate;
     private LocalDate returnDate;
     private boolean returnDateExpired;
 
-    @ManyToMany(mappedBy = "users")
+    @ManyToMany
+    @JoinTable(
+            name = "borrowed_publication",
+            joinColumns = @JoinColumn(name = "borrowed_id"),
+            inverseJoinColumns = @JoinColumn(name = "publication_id")
+    )
     private List<Publication> publications = new ArrayList<>();
 
-    public Borrowed(User user, Publication publication, String borrowedDate, boolean returnDateExpired) {
+    public Borrowed(User user, Publication publication, String borrowedDate, List<Publication> publications) {
         this.user = user;
-        this.publication = publication;
         this.borrowedDate = LocalDate.parse(borrowedDate);
         this.returnDate = LocalDate.parse(borrowedDate).plusMonths(1);
         this.returnDateExpired = LocalDate.parse(borrowedDate).plusMonths(1).isAfter(LocalDate.now());
+        this.publications = publications;
     }
 
     public User getUser() {
@@ -39,12 +41,12 @@ public class Borrowed {
         this.user = user;
     }
 
-    public Publication getPublication() {
-        return publication;
+    public List<Publication> getPublications() {
+        return publications;
     }
 
-    public void setPublication(Publication publication) {
-        this.publication = publication;
+    public void setPublications(List<Publication> publications) {
+        this.publications = publications;
     }
 
     public LocalDate getBorrowedDate() {
@@ -76,7 +78,6 @@ public class Borrowed {
         return new StringJoiner(", ", Borrowed.class.getSimpleName() + "[", "]")
                 .add("id=" + id)
                 .add("user=" + user)
-                .add("publication=" + publication)
                 .add("borrowedDate=" + borrowedDate)
                 .add("returnDate=" + returnDate)
                 .add("returnDateExpired=" + returnDateExpired)
