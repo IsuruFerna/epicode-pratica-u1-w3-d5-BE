@@ -1,10 +1,13 @@
 package epicode.dao;
 
+import epicode.entities.Book;
 import epicode.entities.Publication;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Query;
+import javax.persistence.TypedQuery;
+import java.util.List;
 
 public class PublicationDAO {
     private final EntityManager em;
@@ -32,6 +35,27 @@ public class PublicationDAO {
 
         if (numPublicationDeleted > 0) System.out.println("Item removed");
         else System.out.println("Did not find any item with " + isbn);
+    }
+
+    public void findByRelasedYear(int year) {
+        TypedQuery<Publication> getAllQuerry = em.createQuery("SELECT a FROM Publication a WHERE a.releasedYear = :year", Publication.class);
+        getAllQuerry.setParameter("year", year);
+        System.out.println("------------Found by released year -------------");
+        getAllQuerry.getResultList().forEach(System.out::println);
+    }
+
+    public void findByAuthor(String author) {
+        TypedQuery<Book> getAllQuerry = em.createQuery("SELECT a FROM Book a WHERE LOWER(a.author) LIKE :author", Book.class);
+        getAllQuerry.setParameter("author", "%" + author.toLowerCase() + "%");
+        System.out.println("------------Found by author -------------");
+        getAllQuerry.getResultList().forEach(System.out::println);
+    }
+
+    public void findByTitle(String title) {
+        TypedQuery<Publication> getAllQuerry = em.createQuery("SELECT a FROM Publication a WHERE LOWER(a.title) LIKE :title", Publication.class);
+        getAllQuerry.setParameter("title", "%" + title.toLowerCase() + "%");
+        System.out.println("------------Found by title -------------");
+        getAllQuerry.getResultList().forEach(System.out::println);
     }
 
 }

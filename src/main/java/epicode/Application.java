@@ -20,13 +20,18 @@ public class Application {
 //        User bob = new User("Bob", "Marley", "1999-02-02", "eeee");
 //        user.save(bob);
 
-        Book book1 = new Book(2010, 150, "Bob", "fantacy");
-        Magazine mag1 = new Magazine(2013, 50, Period.MONTHLY);
+        Book book1 = new Book("Bob's jurney",2010, 150, "Bob", "fantacy");
+        Book book2 = new Book("Amda returns",2010, 350, "Foo", "horror");
+        Magazine mag1 = new Magazine("How to bake cookies",2013, 50, Period.MONTHLY);
 
 //        pd.save(book1);
+//        pd.save(book2);
 //        pd.save(mag1);
+//        pd.remove(4);
 
-        pd.remove(4);
+        pd.findByRelasedYear(2010);
+        pd.findByAuthor("ob");
+        pd.findByTitle("amda");
 
 
     }

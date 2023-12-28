@@ -16,13 +16,17 @@ public abstract class Publication {
     @GeneratedValue
     @Column(name="isbn_code")
     private long ISBNcode;
+    private String title;
     private int releasedYear;
     private int numPages;
+
+    public Publication() {}
 
     @ManyToMany(mappedBy = "publications")
     private List<Borrowed> borroweds = new ArrayList<>();
 
-    public Publication(int releasedYear, int numPages) {
+    public Publication(String title, int releasedYear, int numPages) {
+        this.title = title;
         this.releasedYear = LocalDate.of(releasedYear, 1, 1).getYear();
         this.numPages = numPages;
     }
