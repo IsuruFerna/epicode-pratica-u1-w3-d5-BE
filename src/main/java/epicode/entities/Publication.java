@@ -14,25 +14,24 @@ import java.util.StringJoiner;
 public abstract class Publication {
     @Id
     @GeneratedValue
-    @Column(name="isbn_code", unique = true)
+    @Column(name="isbn_code")
     private long ISBNcode;
-    private LocalDate releasedYear;
+    private int releasedYear;
     private int numPages;
 
     @ManyToMany(mappedBy = "publications")
     private List<Borrowed> borroweds = new ArrayList<>();
 
-    public Publication(long ISBNcode, LocalDate releasedYear, int numPages) {
-        this.ISBNcode = ISBNcode;
-        this.releasedYear = releasedYear;
+    public Publication(int releasedYear, int numPages) {
+        this.releasedYear = LocalDate.of(releasedYear, 1, 1).getYear();
         this.numPages = numPages;
     }
 
-    public LocalDate getReleasedYear() {
+    public int getReleasedYear() {
         return releasedYear;
     }
 
-    public void setReleasedYear(LocalDate releasedYear) {
+    public void setReleasedYear(int releasedYear) {
         this.releasedYear = releasedYear;
     }
 

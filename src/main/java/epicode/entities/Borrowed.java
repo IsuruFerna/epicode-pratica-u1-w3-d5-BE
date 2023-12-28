@@ -23,9 +23,9 @@ public class Borrowed {
             joinColumns = @JoinColumn(name = "borrowed_id"),
             inverseJoinColumns = @JoinColumn(name = "publication_id")
     )
-    private List<Publication> publications = new ArrayList<>();
+    private List<Publication> publications;
 
-    public Borrowed(User user, Publication publication, String borrowedDate, List<Publication> publications) {
+    public Borrowed(User user, String borrowedDate, List<Publication> publications) {
         this.user = user;
         this.borrowedDate = LocalDate.parse(borrowedDate);
         this.returnDate = LocalDate.parse(borrowedDate).plusMonths(1);

@@ -8,8 +8,8 @@ import java.util.StringJoiner;
 public class Magazine extends Publication {
     private Period period;
 
-    public Magazine(long ISBNcode, LocalDate releasedYear, int numPages, Period period) {
-        super(ISBNcode, releasedYear, numPages);
+    public Magazine(int releasedYear, int numPages, Period period) {
+        super(releasedYear, numPages);
         this.period = period;
     }
 
