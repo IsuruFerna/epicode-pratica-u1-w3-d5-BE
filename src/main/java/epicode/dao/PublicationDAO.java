@@ -1,6 +1,7 @@
 package epicode.dao;
 
 import epicode.entities.Book;
+import epicode.entities.Borrowed;
 import epicode.entities.Publication;
 
 import javax.persistence.EntityManager;
@@ -44,18 +45,46 @@ public class PublicationDAO {
         getAllQuerry.getResultList().forEach(System.out::println);
     }
 
-    public void findByAuthor(String author) {
+    public Book findByAuthor(String author) {
         TypedQuery<Book> getAllQuerry = em.createQuery("SELECT a FROM Book a WHERE LOWER(a.author) LIKE :author", Book.class);
         getAllQuerry.setParameter("author", "%" + author.toLowerCase() + "%");
         System.out.println("------------Found by author -------------");
-        getAllQuerry.getResultList().forEach(System.out::println);
+        List<Book> bookList = getAllQuerry.getResultList();
+        bookList.forEach(System.out::println);
+
+//        getting the first book
+//        later make a scan to select a specific book
+
+
+        if (bookList.isEmpty()) {
+            System.out.println("Book by " + author + " did not found!");
+            return null;
+        } else {
+            System.out.println("Book found!");
+            System.out.println(bookList.get(0));
+            return bookList.get(0);
+        }
     }
 
-    public void findByTitle(String title) {
+    public Publication findByTitle(String title) {
         TypedQuery<Publication> getAllQuerry = em.createQuery("SELECT a FROM Publication a WHERE LOWER(a.title) LIKE :title", Publication.class);
         getAllQuerry.setParameter("title", "%" + title.toLowerCase() + "%");
         System.out.println("------------Found by title -------------");
-        getAllQuerry.getResultList().forEach(System.out::println);
+        List<Publication> publicationList = getAllQuerry.getResultList();
+        publicationList.forEach(System.out::println);
+
+        //        getting the first book
+//        later make a scan to select a specific book
+
+
+        if (publicationList.isEmpty()) {
+            System.out.println("Did not find a book called " + title + "!");
+            return null;
+        } else {
+            System.out.println("Book found!");
+            System.out.println(publicationList.get(0));
+            return publicationList.get(0);
+        }
     }
 
 }

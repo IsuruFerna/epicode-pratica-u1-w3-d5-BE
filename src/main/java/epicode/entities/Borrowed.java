@@ -25,11 +25,14 @@ public class Borrowed {
     )
     private List<Publication> publications;
 
+
+    public Borrowed() {};
+
     public Borrowed(User user, String borrowedDate, List<Publication> publications) {
         this.user = user;
         this.borrowedDate = LocalDate.parse(borrowedDate);
         this.returnDate = LocalDate.parse(borrowedDate).plusMonths(1);
-        this.returnDateExpired = LocalDate.parse(borrowedDate).plusMonths(1).isAfter(LocalDate.now());
+        this.returnDateExpired = LocalDate.parse(borrowedDate).plusMonths(1).isBefore(LocalDate.now());
         this.publications = publications;
     }
 

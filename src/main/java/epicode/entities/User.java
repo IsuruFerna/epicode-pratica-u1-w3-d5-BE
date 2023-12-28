@@ -20,11 +20,17 @@ public class User {
     @OneToMany(mappedBy = "user")
     private List<Borrowed> borroweds = new ArrayList<>();
 
+    public User() {};
+
     public User(String name, String surname, String birthDate, String cardNumber) {
         this.name = name;
         this.surname = surname;
         this.birthDate = LocalDate.parse(birthDate);
         this.cardNumber = cardNumber;
+    }
+
+    public long getId() {
+        return id;
     }
 
     public String getName() {
