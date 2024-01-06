@@ -4,6 +4,7 @@ import epicode.dao.BorrowedDAO;
 import epicode.dao.PublicationDAO;
 import epicode.dao.UserDAO;
 import epicode.entities.*;
+import epicode.utils.ISBN;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -57,7 +58,7 @@ public class Application {
         bd.borrowedByCardNumber("eeee");
         bd.findAllReturnDateExpired();
 
-
+        ISBN.generateIsbn();
 
 
     }
