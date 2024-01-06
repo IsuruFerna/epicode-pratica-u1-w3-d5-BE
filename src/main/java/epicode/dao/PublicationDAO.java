@@ -1,7 +1,6 @@
 package epicode.dao;
 
 import epicode.entities.Book;
-import epicode.entities.Borrowed;
 import epicode.entities.Publication;
 
 import javax.persistence.EntityManager;
@@ -23,6 +22,11 @@ public class PublicationDAO {
         em.persist(a);
         transaction.commit();
         System.out.println("New item saved correctly!");
+    }
+
+    public boolean findByIsbnToGenerateNewISBN(long isbn) {
+        Publication exist = em.find(Publication.class, isbn);
+        return exist != null;
     }
 
     public void remove(long isbn) {

@@ -14,7 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Application {
-    private static final EntityManagerFactory emf = Persistence.createEntityManagerFactory("u1w3d5");
+    public static final EntityManagerFactory emf = Persistence.createEntityManagerFactory("u1w3d5");
     public static void main(String[] args) {
         EntityManager em = emf.createEntityManager();
 
@@ -58,8 +58,8 @@ public class Application {
         bd.borrowedByCardNumber("eeee");
         bd.findAllReturnDateExpired();
 
-        ISBN.generateIsbn();
-
+        ISBN code = new ISBN();
+        code.generateIsbn();
 
     }
 }

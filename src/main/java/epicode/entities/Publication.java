@@ -14,7 +14,7 @@ import java.util.StringJoiner;
 public abstract class Publication {
     @Id
     @GeneratedValue
-    @Column(name="isbn_code")
+    @Column(name="isbn_code", unique = true)
     private long ISBNcode;
     private String title;
     private int releasedYear;
