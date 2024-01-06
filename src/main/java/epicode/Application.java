@@ -13,7 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Application {
-    private static final EntityManagerFactory emf = Persistence.createEntityManagerFactory("u1w3d5");
+    public static final EntityManagerFactory emf = Persistence.createEntityManagerFactory("u1w3d5");
     public static void main(String[] args) {
         EntityManager em = emf.createEntityManager();
 
@@ -36,7 +36,7 @@ public class Application {
 //        pd.save(book1);
 //        pd.save(book2);
 //        pd.save(mag1);
-//        pd.remove(4);
+//        pd.remove("83448850-0");
 
         pd.findByRelasedYear(2010);
         pd.findByAuthor("ob");
@@ -56,9 +56,6 @@ public class Application {
 
         bd.borrowedByCardNumber("eeee");
         bd.findAllReturnDateExpired();
-
-
-
 
     }
 }
