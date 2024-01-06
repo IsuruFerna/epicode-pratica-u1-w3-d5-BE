@@ -2,6 +2,8 @@ package epicode.entities;
 
 //import javax.persistence.Entity;
 //import javax.persistence.Id;
+import epicode.utils.ISBN;
+
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -13,9 +15,9 @@ import java.util.StringJoiner;
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 public abstract class Publication {
     @Id
-    @GeneratedValue
+//    @GeneratedValue
     @Column(name="isbn_code", unique = true)
-    private long ISBNcode;
+    private String ISBNcode;
     private String title;
     private int releasedYear;
     private int numPages;
@@ -26,6 +28,7 @@ public abstract class Publication {
     private List<Borrowed> borroweds = new ArrayList<>();
 
     public Publication(String title, int releasedYear, int numPages) {
+        this.ISBNcode = new ISBN().generateIsbn();
         this.title = title;
         this.releasedYear = LocalDate.of(releasedYear, 1, 1).getYear();
         this.numPages = numPages;

@@ -4,7 +4,6 @@ import epicode.dao.BorrowedDAO;
 import epicode.dao.PublicationDAO;
 import epicode.dao.UserDAO;
 import epicode.entities.*;
-import epicode.utils.ISBN;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -37,7 +36,7 @@ public class Application {
 //        pd.save(book1);
 //        pd.save(book2);
 //        pd.save(mag1);
-//        pd.remove(4);
+//        pd.remove("83448850-0");
 
         pd.findByRelasedYear(2010);
         pd.findByAuthor("ob");
@@ -57,9 +56,6 @@ public class Application {
 
         bd.borrowedByCardNumber("eeee");
         bd.findAllReturnDateExpired();
-
-        ISBN code = new ISBN();
-        code.generateIsbn();
 
     }
 }

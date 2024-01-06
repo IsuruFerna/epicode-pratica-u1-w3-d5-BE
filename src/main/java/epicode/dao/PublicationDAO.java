@@ -24,12 +24,12 @@ public class PublicationDAO {
         System.out.println("New item saved correctly!");
     }
 
-    public boolean findByIsbnToGenerateNewISBN(long isbn) {
+    public boolean findByIsbnToGenerateNewISBN(String isbn) {
         Publication exist = em.find(Publication.class, isbn);
         return exist != null;
     }
 
-    public void remove(long isbn) {
+    public void remove(String isbn) {
         EntityTransaction transaction = em.getTransaction();
         transaction.begin();
 
